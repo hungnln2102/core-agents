@@ -67,6 +67,7 @@ Mọi hoạt động phát triển, kiểm thử, tối ưu và vận hành tron
 - **Các file dự kiến tác động**: [Liệt kê đường dẫn file dạng clickable link]
 - **Rủi ro (Side effects) & Đối sách**: [Ảnh hưởng module khác/DB/cache và cách khống chế]
 - **Kế hoạch kiểm thử (Testing)**: [Unit test, integration test, E2E test cụ thể]
+- **Bước nghiệm thu kỹ thuật cuối cùng (Bắt buộc kiểm soát lỗi text)**: Chạy `python scripts/scan_text_errors.py <danh_sách_file_chỉnh_sửa>` (và `python scripts/fix_text_errors.py` nếu có lỗi) để bảo đảm 100% file vừa sửa không bị lỗi text, encoding, Mojibake, BOM hay vỡ dấu `?`. Tuyệt đối CHỈ QUÉT CÁC FILE CHỈNH SỬA, không quét toàn bộ dự án.
 
 👉 **Xin phép Master**: "Master có đồng ý với Đặc Tả Spec-Kit và Phương Án Pre-Flight Check ở trên để bắt đầu thực hiện không ạ?"
 ```
@@ -166,6 +167,7 @@ Một nhiệm vụ CHỈ ĐƯỢC XEM LÀ HOÀN THÀNH khi:
 5. Thay đổi nằm ĐÚNG PHẠM VI Master đã phê duyệt.
 6. Không làm ảnh hưởng hoặc làm mất các thay đổi chưa commit của Master.
 7. Cập nhật tài liệu / bộ nhớ sống nếu thay đổi ảnh hưởng tới kiến trúc chung.
+8. **Kiểm soát lỗi text đạt chuẩn 100%**: Bước nghiệm thu cuối cùng BẮT BUỘC phải chạy `python scripts/scan_text_errors.py <danh_sách_file_chỉnh_sửa>` trên toàn bộ các file vừa sửa đổi và đạt kết quả PASS (exit code 0). Tuyệt đối CHỈ QUÉT CÁC FILE CHỈNH SỬA, không quét toàn bộ dự án để tránh lãng phí tài nguyên và làm chậm tiến độ.
 
 ---
 
