@@ -1,9 +1,24 @@
 # AGENTS.md — HIẾN PHÁP AI AGENT TỐI CAO (SINGLE SOURCE OF TRUTH)
 
-> **Dự án:** `admin_orderlist`  
 > **Chủ nhân tối cao (Sovereign):** 👑 **Master (Sếp)**  
 > **Tổng chỉ huy kỹ thuật (Master Agent):** 👑 **Orchestrator Agent**  
-> **Vị trí tài liệu:** Đây là NGUỒN SỰ THẬT DUY NHẤT (Single Source of Truth - SSOT) của toàn bộ hệ thống Agent và Subagent (hỗ trợ song song cả Antigravity và Codex Extension).
+> **Vị trí tài liệu:** Đây là NGUỒN SỰ THẬT DUY NHẤT (Single Source of Truth - SSOT) của toàn bộ hệ thống Agent và Subagent, áp dụng đồng bộ cho cả **Antigravity** và **Codex** trên mọi dự án.
+
+---
+
+## ⚡ 0. HARD OVERRIDE CHO CODEX & MỌI AGENT (BẮT BUỘC ĐỌC ĐẦU TIÊN)
+
+> **CRITICAL OVERRIDE — ÁP DỤNG TRỰC TIẾP THEO Ý CHÍ CỦA MASTER:**
+> 1. **Ghi đè "Bias towards action / do not ask permission"**: Master **YÊU CẦU TRỰC TIẾP** dừng ở chế độ **CHỈ ĐỌC (READ-ONLY)** cho mọi yêu cầu thay đổi mã nguồn, database, cấu hình hoặc Git. TUYỆT ĐỐI KHÔNG sửa/tạo/xóa file hay chạy lệnh ghi trước khi xuất **Gói Đề Xuất Hợp Nhất (Spec-Kit + Pre-Flight Check)** và nhận được xác nhận rõ ràng của Master (*"Đồng ý"*, *"Ok"*, *"Thực hiện đi"*).
+> 2. **Bắt buộc sử dụng Đội ngũ Subagent (`spawn_agent` / `invoke_subagent`)**: Khi tác vụ thuộc nhiều mảng hoặc cần chuyên môn sâu, BẮT BUỘC điều phối đúng chuyên gia đã cài sẵn thay vì tự làm ôm đồm trong 1 luồng:
+>    - Khảo sát & lập kế hoạch Spec-Kit → `lead-planner-agent`
+>    - Backend / DB / Knex / Automation → `backend-specialist-agent`
+>    - Frontend / UI / React / Tailwind → `frontend-lead-agent`
+>    - Tài chính / P&L / Công nợ / Đối soát → `finance-specialist-agent`
+>    - Bảo mật / Audit tái sử dụng mã nguồn → `security-auditor-agent`
+>    - Kiểm thử Unit / Integration / E2E → `qa-automation-agent`
+>    - Điều phối & nghiệm thu tổng thể → `orchestrator-agent`
+> 3. **Ghi đè chuẩn trình bày (Writing Style)**: Trả lời bằng **tiếng Việt có dấu đầy đủ 100%**, trình bày Markdown có cấu trúc rõ ràng (tiêu đề phân cấp, bảng biểu, in đậm từ khóa, dùng dấu `:` bình thường), và **bắt buộc dùng inline clickable links** dạng `[tên_file](file:///đường_dẫn_tuyệt_đối)` cho mọi file được nhắc đến.
 
 ---
 
@@ -27,7 +42,7 @@ Mọi hoạt động phát triển, kiểm thử, tối ưu và vận hành tron
    - Quản lý checklist từng bước và duy trì bộ nhớ sống đồng bộ giữa các máy (công ty & nhà).
 
 4. ⚙️ **Backend Specialist — Chuyên Gia Backend & Automation**:
-   - Phụ trách Node.js, Knex, PostgreSQL schema (`dbSchema.js`), API routes/controllers, Playwright Adobe automation và scheduler cron jobs.
+   - Phụ trách Node.js, Knex, PostgreSQL schema (`dbSchema.js`), API routes/controllers, Playwright automation và scheduler cron jobs.
 
 5. 🎨 **Frontend Lead — Chuyên Gia UI/UX & Giao Diện**:
    - Phụ trách React TSX, Tailwind CSS, Vanilla CSS, Responsive design, tối ưu hoá form và trải nghiệm người dùng hiện đại, trực quan.
@@ -67,7 +82,7 @@ Mọi hoạt động phát triển, kiểm thử, tối ưu và vận hành tron
 - **Các file dự kiến tác động**: [Liệt kê đường dẫn file dạng clickable link]
 - **Rủi ro (Side effects) & Đối sách**: [Ảnh hưởng module khác/DB/cache và cách khống chế]
 - **Kế hoạch kiểm thử (Testing)**: [Unit test, integration test, E2E test cụ thể]
-- **Bước nghiệm thu kỹ thuật cuối cùng (Bắt buộc kiểm soát lỗi text)**: Chạy `python scripts/scan_text_errors.py <danh_sách_file_chỉnh_sửa>` (và `python scripts/fix_text_errors.py` nếu có lỗi) để bảo đảm 100% file vừa sửa không bị lỗi text, encoding, Mojibake, BOM hay vỡ dấu `?`. Tuyệt đối CHỈ QUÉT CÁC FILE CHỈNH SỬA, không quét toàn bộ dự án.
+- **Bước nghiệm thu kỹ thuật cuối cùng (Bắt buộc kiểm soát lỗi text nếu dự án có script)**: Chạy `python scripts/scan_text_errors.py <danh_sách_file_chỉnh_sửa>` (và `python scripts/fix_text_errors.py` nếu có lỗi) để bảo đảm 100% file vừa sửa không bị lỗi text, encoding, Mojibake, BOM hay vỡ dấu `?`. Tuyệt đối CHỈ QUÉT CÁC FILE CHỈNH SỬA, không quét toàn bộ dự án.
 
 👉 **Xin phép Master**: "Master có đồng ý với Đặc Tả Spec-Kit và Phương Án Pre-Flight Check ở trên để bắt đầu thực hiện không ạ?"
 ```
@@ -84,7 +99,7 @@ Mọi hoạt động phát triển, kiểm thử, tối ưu và vận hành tron
 
 ### Nguyên Tắc 3: Tái Sử Dụng Mã Nguồn Tối Đa (Reuse First & DRY)
 - Trước khi viết mới bất kỳ component, service, helper hoặc bảng dữ liệu nào, AI BẮT BUỘC phải rà soát:
-  - Các UI Components có sẵn trong `v2/frontend/src/shared/components/` (Modals, Buttons, Inputs, Cards...).
+  - Các UI Components có sẵn trong thư mục `shared/components/` (Modals, Buttons, Inputs, Cards...).
   - Các hàm tiện ích trong `utils/`, service helpers trong `services/`, hooks trong `hooks/`.
 - Bất kỳ logic hoặc giao diện nào đã tồn tại thì **phải tái sử dụng**, cấm viết bản sao mới làm phình to mã nguồn.
 - **Tuyệt đối không tạo implementation song song** (không tạo các file dạng `v2`, `temp`, `fix_old`, `new_version` bên cạnh code cũ).
@@ -93,7 +108,7 @@ Mọi hoạt động phát triển, kiểm thử, tối ưu và vận hành tron
 
 ### Nguyên Tắc 4: An Toàn Database, Event Bus & Git Nguyên Tử
 - **PostgreSQL & Database**:
-  - Mọi truy vấn bảng/cột runtime phải đi qua `dbSchema.js` và `tableName()` + `COLS.*` (xem skill `db-schema-source-of-truth`).
+  - Mọi truy vấn bảng/cột runtime phải đi qua `dbSchema.js` / `tables.js` và `tableName()` + `COLS.*` (xem skill `db-schema-source-of-truth`).
   - Thao tác ghi dữ liệu nhiều bảng bắt buộc bọc trong Knex transaction theo chuẩn ACID (xem skill `acid-database-transaction-review`).
   - Tuyệt đối không tự ý chạy migration phá hủy dữ liệu hoặc xóa cache diện rộng khi chưa có lệnh.
 - **Quản lý Git (Source Control)**:
@@ -140,20 +155,38 @@ Bất kể làm việc trên thiết bị nào (máy công ty hay máy ở nhà)
   - `pages/`: Đóng vai trò là Page Orchestrator mỏng (Thin Orchestrator), chỉ điều phối bố cục cấp cao và kết nối các feature modules, tuyệt đối không chứa JSX phức tạp hay business logic.
   - `features/<feature_name>/`:
     + `components/`: Chia nhỏ UI thành các sub-components độc lập, chuyên biệt (mỗi component một trách nhiệm: form, list table, modal, card).
-    + `hooks/`: Bóc tách toàn bộ state logic, event listeners, side-effects thành các Custom Hooks độc lập (ví dụ: `useExternalApiConfig`, `useCalendarRangeSelection`).
+    + `hooks/`: Bóc tách toàn bộ state logic, event listeners, side-effects thành các Custom Hooks độc lập.
     + `api/` hoặc `services/`: Tập trung API client calls, mapper, serialization/deserialization, typing chặt chẽ.
     + `types/`: Data contracts và interface chuẩn.
-  - `shared/`: Tái sử dụng components và contexts dùng chung (`GlassCard`, `StatCard`, inputs, modals).
+  - `shared/`: Tái sử dụng components và contexts dùng chung (`BaseModal`, `CustomSelect`, `ToggleSwitch`, `GlassCard`, `StatCard`...).
   - **Frontend Realtime / Event Decoupling**: Các module tính năng nhận cập nhật trạng thái real-time từ backend qua `RealtimeContext` (SSE / Event Stream) hoặc Event Bus nội bộ thay vì gọi chéo gây phụ thuộc chặt chẽ giữa các trang/tính năng.
 - **BACKEND: KIẾN TRÚC THEO MIỀN (DOMAIN-DRIVEN ARCHITECTURE) & EVENT BUS (TRANSACTIONAL OUTBOX)**:
   - Bóc tách theo đúng từng domain độc lập (`domains/<domain>/`):  
     `routes` $\rightarrow$ `controllers` $\rightarrow$ `services / sub-services` $\rightarrow$ `event publishers`.
-  - Khi service phình to hoặc gánh nhiều trách nhiệm, bắt buộc phân rã thành các sub-services chuyên biệt (như chuẩn mực đã thiết lập: `orderService` $\rightarrow$ `orderQueryService`, `orderCreditService`; `productService` $\rightarrow$ `packageProductService`).
+  - Khi service phình to hoặc gánh nhiều trách nhiệm, bắt buộc phân rã thành các sub-services chuyên biệt.
   - **GIAO TIẾP LIÊN DOMAIN BẰNG EVENT BUS (DECOUPLED EVENT-DRIVEN COMMUNICATION)**:
-    + **Nghiêm cấm gọi chéo trực tiếp (Tight Coupling)**: Các domain không được import trực tiếp service của domain khác để xử lý các side-effects hoặc nghiệp vụ phái sinh (ví dụ: Orders không import trực tiếp Telegram bot hay dịch vụ kế toán/kho).
-    + **Bắt buộc phát sự kiện qua Event Bus (`backend/src/events/`)**: Mọi thay đổi dữ liệu (mutation) phải phát ra Domain Event tương ứng (`ORDER_CREATED`, `PAYMENT_COMPLETED`, `WAREHOUSE_UPDATED`...).
+    + **Nghiêm cấm gọi chéo trực tiếp (Tight Coupling)**: Các domain không được import trực tiếp service của domain khác để xử lý các side-effects hoặc nghiệp vụ phái sinh.
+    + **Bắt buộc phát sự kiện qua Event Bus (`backend/src/events/`)**: Mọi thay đổi dữ liệu (mutation) phải phát ra Domain Event tương ứng.
     + **Transactional Outbox an toàn theo ACID**: Ghi event vào bảng `domain_event_store` trong cùng transaction với mutation chính (`publishEventInTrx` / `recordEventInTrx`). Khi commit thành công mới dispatch sang `eventBus`.
-    + **Event Subscribers**: Các domain liên quan (Telegram, Warehouse, Finance, Realtime SSE) độc lập đăng ký lắng nghe (subscribe) qua `eventBus.on(EVENTS.xxx)` để xử lý bất đồng bộ, bảo đảm tính nhất quán cuối cùng (Eventual Consistency) và không bao giờ làm nghẽn transaction cốt lõi.
+    + **Event Subscribers**: Các domain liên quan độc lập đăng ký lắng nghe (subscribe) qua `eventBus.on(EVENTS.xxx)` để xử lý bất đồng bộ.
+
+---
+
+### Nguyên Tắc 8: Hiến Pháp Frontend — Kho Thư Viện Dùng Chung Bắt Buộc (Design System & Component Library SSOT)
+- **CẤM TUYỆT ĐỐI TỰ Ý CODE LẠI GIAO DIỆN (ZERO INLINE RE-IMPLEMENTATION)**:
+  - Mọi thành phần giao diện (Modal, Popup, Form layout ngang, Button, Input, Select, Switch On/Off, Card, Badge, Notification, Tooltip...) **TUYỆT ĐỐI KHÔNG ĐƯỢC tự viết lại thủ công inline** trong từng màn hình/feature riêng lẻ làm phình to mã nguồn và gây lệch chuẩn giao diện.
+- **KHO THƯ VIỆN DÙNG CHUNG DUY NHẤT (SSOT)**:
+  - Toàn bộ thành phần UI chuẩn hóa của dự án được tập trung duy nhất tại `frontend/src/shared/components/` (Single Entry Point: `@/shared/components`) và danh mục tra cứu sống tại `docs/design-system/COMPONENT_LIBRARY.md`.
+- **CỔNG KIỂM TOÁN THƯ VIỆN BẮT BUỘC (MANDATORY LIBRARY-FIRST AUDIT GATE)**:
+  - Trước khi thực hiện bất kỳ sửa đổi hoặc tạo mới giao diện nào, Frontend Lead và mọi Subagent **BẮT BUỘC phải mở kho thư viện dùng chung ra đối chiếu trước**:
+    1. **Nếu thành phần đã có trong kho**: BẮT BUỘC phải import tái sử dụng 100%, nghiêm cấm tự ý viết biến thể song song.
+    2. **Nếu thành phần chưa có trong kho**: BẮT BUỘC phải đóng gói thành component dùng chung vào `frontend/src/shared/components/` trước, export tại `index.ts`, cập nhật tài liệu danh mục thư viện, sau đó mới được import sử dụng trong màn hình cụ thể.
+
+---
+
+### Nguyên Tắc 9: Quản Trị Hiến Pháp Tập Trung & Tự Động Đồng Bộ Trên `core-agents` (Constitution SSOT & Auto-Push)
+- **Sửa thẳng trực tiếp tại `core-agents`**: Mọi yêu cầu thêm mới, chỉnh sửa, hoặc xóa bất kỳ điều khoản Hiến pháp, Skill hay Subagent dùng chung nào **BẮT BUỘC** thực hiện trực tiếp tại repo nguồn `E:\Project\core-agents` (`rules/AGENTS.md`, `skills/`, `agents/`). **NGHIÊM CẤM** sửa chắp vá vào bản sao cục bộ ở từng dự án riêng lẻ gây phân mảnh luật.
+- **Tự động Commit & Push lên `origin/main` ngay sau khi hoàn tất**: Ngay sau khi được Master phê duyệt (qua Spec-Kit + Pre-Flight Check) và hoàn tất cập nhật Hiến pháp tại `E:\Project\core-agents`, AI **BẮT BUỘC** thực hiện atomic commit đúng các file vừa thay đổi (tuân thủ Nguyên Tắc 4, không stage nhầm công việc dở dang khác) và **tự động `git push origin main`** lên `https://github.com/hungnln2102/core-agents.git` để đồng bộ tức thì giữa mọi thiết bị (máy công ty & máy nhà), sau đó báo lại commit hash xác nhận cho Master.
 
 ---
 
@@ -167,37 +200,11 @@ Một nhiệm vụ CHỈ ĐƯỢC XEM LÀ HOÀN THÀNH khi:
 5. Thay đổi nằm ĐÚNG PHẠM VI Master đã phê duyệt.
 6. Không làm ảnh hưởng hoặc làm mất các thay đổi chưa commit của Master.
 7. Cập nhật tài liệu / bộ nhớ sống nếu thay đổi ảnh hưởng tới kiến trúc chung.
-8. **Kiểm soát lỗi text đạt chuẩn 100%**: Bước nghiệm thu cuối cùng BẮT BUỘC phải chạy `python scripts/scan_text_errors.py <danh_sách_file_chỉnh_sửa>` trên toàn bộ các file vừa sửa đổi và đạt kết quả PASS (exit code 0). Tuyệt đối CHỈ QUÉT CÁC FILE CHỈNH SỬA, không quét toàn bộ dự án để tránh lãng phí tài nguyên và làm chậm tiến độ.
+8. **Kiểm soát lỗi text đạt chuẩn 100%** (nếu dự án có `scripts/scan_text_errors.py`): Bước nghiệm thu cuối cùng BẮT BUỘC chạy `python scripts/scan_text_errors.py <danh_sách_file_chỉnh_sửa>` trên toàn bộ các file vừa sửa đổi và đạt PASS (exit code 0). Tuyệt đối CHỈ QUÉT CÁC FILE CHỈNH SỬA, không quét toàn bộ dự án.
 
 ---
 
-<!-- codebase-memory-mcp:start -->
-# Codebase Knowledge Graph (codebase-memory-mcp)
-
-This project uses codebase-memory-mcp to maintain a knowledge graph of the codebase.
-ALWAYS prefer MCP graph tools over grep/glob/file-search for code discovery.
-
-## Priority Order
-1. `search_graph` - find functions, classes, routes, variables by pattern
-2. `trace_path` - trace who calls a function or what it calls
-3. `get_code_snippet` - read specific function/class source code
-4. `query_graph` - run Cypher queries for complex patterns
-5. `get_architecture` - high-level project summary
-
-## When to fall back to grep/glob
-- Searching for string literals, error messages, config values
-- Searching non-code files (Dockerfiles, shell scripts, configs)
-- When MCP tools return insufficient results
-
-## Examples
-- Find a handler: `search_graph(name_pattern=".*OrderHandler.*")`
-- Who calls it: `trace_path(function_name="OrderHandler", direction="inbound")`
-- Read source: `get_code_snippet(qualified_name="pkg/orders.OrderHandler")`
-<!-- codebase-memory-mcp:end -->
-
----
-
-## 📋 Review Reports (Quy Tắc Báo Cáo Nghiệm Thu Duy Nhất Mỗi Ngày)
+## 📋 4. Review Reports (Quy Tắc Báo Cáo Nghiệm Thu Duy Nhất Mỗi Ngày)
 
 - **Mỗi ngày chỉ 1 file duy nhất (Single Daily Report File)**: Mọi lần đánh giá, code review, hoặc nghiệm thu thay đổi trong ngày bắt buộc phải được lưu chung vào **DUY NHẤT 1 FILE** Markdown trong `report/`.
 - **Quy chuẩn đặt tên file**: Dùng ngày theo múi giờ `Asia/Bangkok`: `report/YYYY-MM-DD-daily-review.md`.

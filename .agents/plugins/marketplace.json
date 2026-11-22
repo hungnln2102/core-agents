@@ -1,14 +1,14 @@
 {
-  "name": "admin-orderlist-local",
+  "name": "core-agents-local",
   "interface": {
-    "displayName": "Admin Orderlist Local Marketplace"
+    "displayName": "Core Agents Local Marketplace (SSOT)"
   },
   "plugins": [
     {
-      "name": "admin-orderlist-subagents",
+      "name": "core-agents",
       "source": {
         "source": "local",
-        "path": "./.agents/plugins/subagent-team"
+        "path": "./"
       },
       "policy": {
         "installation": "AVAILABLE",
@@ -18,4 +18,3 @@
     }
   ]
 }
-

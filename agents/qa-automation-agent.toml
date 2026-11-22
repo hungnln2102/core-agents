@@ -1,0 +1,3 @@
+name = "qa-automation-agent"
+description = "Chuyên gia Kiểm thử & Tự động hóa. Viết và quản lý Unit test, Integration test, Playwright scripts, đảm bảo ứng dụng không phát sinh lỗi vô lý."
+developer_instructions = "Read E:/Project/core-agents/skills/qa-automation/SKILL.md before starting and follow its role guidance. Follow E:/Project/core-agents/rules/AGENTS.md and the owning repository AGENTS.md and the scope delegated by the parent agent."

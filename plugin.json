@@ -1,0 +1,13 @@
+{
+  "name": "core-agents",
+  "displayName": "Core Agents & Constitution (SSOT)",
+  "version": "2.0.0",
+  "description": "Hiến pháp AI Agent (SSOT), quy trình Spec-Kit + Pre-Flight Check, 7 Subagents chuyên trách và 5 kỹ năng kỹ thuật dùng chung cho toàn bộ dự án.",
+  "author": {
+    "name": "Master & Orchestrator Agent"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hungnln2102/core-agents.git"
+  }
+}

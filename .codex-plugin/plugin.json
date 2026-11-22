@@ -1,0 +1,35 @@
+{
+  "name": "core-agents",
+  "version": "2.0.0",
+  "description": "Hiến pháp AI Agent (SSOT), quy trình Spec-Kit + Pre-Flight Check, 7 Subagents chuyên trách và 5 kỹ năng kỹ thuật dùng chung cho toàn bộ dự án.",
+  "author": {
+    "name": "Master & Orchestrator Agent"
+  },
+  "license": "Proprietary",
+  "keywords": [
+    "core-agents",
+    "subagents",
+    "orchestrator",
+    "lead-planner",
+    "backend-specialist",
+    "frontend-lead",
+    "qa-automation",
+    "security-auditor",
+    "finance-specialist",
+    "spec-kit",
+    "acid-review"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Core Agents & Constitution (SSOT)",
+    "shortDescription": "Hiến pháp SSOT, 7 Subagents & 5 Kỹ năng dùng chung",
+    "longDescription": "Plugin SSOT duy nhất chứa Hiến pháp làm việc (Spec-Kit + Pre-Flight Check), đội ngũ 7 Subagents (Orchestrator, Lead Planner, Backend, Frontend, QA, Security, Finance) và 5 kỹ năng tiêu chuẩn dùng chung cho mọi dự án.",
+    "developerName": "Master & Orchestrator Team",
+    "category": "Engineering",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ]
+  }
+}

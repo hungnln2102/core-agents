@@ -1,49 +1,44 @@
-# Core AI Agents & Constitution (SSOT)
+# Core Agents & Constitution (SSOT Plugin)
 
-> **Single Source of Truth** cho toàn bộ hệ thống Agent, Subagent và Hiến pháp làm việc (Antigravity & Codex Extension).
+> **Single Source of Truth (SSOT)** cho toàn bộ hệ thống Hiến pháp, 7 Subagents và 5 Kỹ năng dùng chung — đóng gói thành **1 Plugin duy nhất** cài đặt ở cấp toàn cục (Global) cho cả **Antigravity** và **Codex**.
 
----
+## 📁 Cấu trúc Plugin SSOT
 
-## 🏛️ Danh Sách Subagents & Kỹ Năng
-1. 👑 **Orchestrator Agent**: Tổng chỉ huy kỹ thuật & Spec-Kit Gatekeeper.
-2. 📝 **Lead Planner**: Thư ký quy hoạch, soạn thảo Spec-Kit & điều phối ký ức.
-3. ⚙️ **Backend Specialist**: Node.js, Knex, PostgreSQL & Automation.
-4. 🎨 **Frontend Lead**: React TSX, Tailwind CSS, Vanilla CSS, UI/UX.
-5. 🧪 **QA Automation**: Unit test, Integration test, Playwright.
-6. 🛡️ **Security Auditor**: Rà soát tái sử dụng mã nguồn & bảo mật.
-7. 💰 **Finance Specialist**: Quản trị tài chính, đối soát SePay/USDT, P&L.
-8. 📋 **Spec-Kit**: Quy trình Spec-Driven Development (SDD) chuẩn Gherkin.
-9. ⚖️ **ACID DB Review**: Chuẩn kiểm toán giao dịch cơ sở dữ liệu.
-10. 🗄️ **DB Schema SSOT**: Chuẩn truy vấn PostgreSQL qua `dbSchema.js`.
-
----
-
-## 🚀 Hướng Dẫn Tích Hợp Dự Án Mới (Git Submodule)
-
-### 1. Nhúng Submodule vào dự án mới
-Tại thư mục gốc của dự án (ví dụ `otp_portal`):
-```bash
-git submodule add https://github.com/hungnln2102/core-agents.git .agents
+```text
+core-agents/
+├── plugin.json                        # Manifest cho Antigravity
+├── .codex-plugin/plugin.json          # Manifest cho Codex
+├── .agents/plugins/marketplace.json   # Local marketplace cho Codex
+├── rules/AGENTS.md                    # Hiến pháp SSOT duy nhất (Antigravity tự nạp)
+├── skills/                            # 12 skills (7 subagent roles + 5 core skills)
+└── agents/                            # 7 định nghĩa subagent (.toml cho Codex)
 ```
 
-### 2. Tạo file `AGENTS.md` tại thư mục gốc dự án
-Tạo file `AGENTS.md` ở root dự án để trỏ tới Hiến pháp:
-```markdown
-@[HIẾN PHÁP AI AGENT TỐI CAO](.agents/AGENTS.md)
+## 🚀 Cài đặt 1 lần trên máy mới (Windows — Công ty / Nhà)
+
+### 1. Clone repo về thư mục cố định
+```powershell
+git clone https://github.com/hungnln2102/core-agents.git E:\Project\core-agents
 ```
 
-### 3. Đồng bộ khi clone dự án về máy mới (Máy ở nhà / Công ty)
-Khi clone dự án về máy khác:
-```bash
-git clone --recurse-submodules <URL_DU_AN>
-```
-Hoặc nếu đã clone từ trước:
-```bash
-git submodule update --init --recursive
+### 2. Gắn vào Antigravity (Directory Junction — không cần quyền Admin)
+```powershell
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.gemini\config\plugins\core-agents" -Target "E:\Project\core-agents"
 ```
 
-### 4. Cập nhật khi có thay đổi luật mới
-Khi repo `core-agents` có phiên bản mới, cập nhật ở dự án con bằng lệnh:
-```bash
-git submodule update --remote --merge
+### 3. Gắn vào Codex (Global Subagents + Local Marketplace)
+```powershell
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.codex\agents" -Target "E:\Project\core-agents\agents"
 ```
+Trong `$env:USERPROFILE\.codex\config.toml`, bật:
+```toml
+[plugins."core-agents@core-agents-local"]
+enabled = true
+
+[marketplaces.core-agents-local]
+source_type = "local"
+source = '\\?\E:\Project\core-agents'
+```
+
+## 🔄 Cập nhật Hiến pháp / Skills cho toàn bộ dự án
+Chỉ cần sửa 1 chỗ duy nhất tại `E:\Project\core-agents\rules\AGENTS.md` (hoặc chạy `git pull` trên máy còn lại) — **tất cả dự án** trên Antigravity và Codex sẽ tự động nhận bản mới mà không cần submodule `.agents` trong từng repo.
